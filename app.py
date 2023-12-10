@@ -3,7 +3,7 @@ import requests
 from flask import Flask, jsonify, redirect, request, session, send_file
 import urllib.parse as urlparse
 from dotenv import load_dotenv
-import json
+import pandas as pd
 import os
 
 app = Flask(__name__)
@@ -163,11 +163,12 @@ def tracks():
         else:
             print(f"Error for batch {i}-{i+batch_size}: {response.status_code}")
     
-    json_filename = 'tracks.json'
-    with open(json_filename, 'w') as json_file:
-        json.dump(track_features_jsons, json_file)
+    # Guarda los datos en un archivo CSV
+    track_features_df = pd.DataFrame(track_features_jsons)
+    csv_filename = 'data.csv'
+    track_features_df.to_csv(csv_filename, index=False)
 
-    return send_file(json_filename, mimetype='application/json', as_attachment=True)
+    return send_file(csv_filename, mimetype='text/csv', as_attachment=True)
 
 
 if __name__ == '__main__':

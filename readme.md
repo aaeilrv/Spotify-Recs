@@ -1,6 +1,6 @@
 # Spotify Recs
 
-Utiliza `tracks.csv` u obtén tu data de Spotify utilizando `app.py`.
+Utiliza `data.csv` u obtén tu data de Spotify utilizando `app.py`.
 
 ## Pasos a seguir para utilizar `app.py`:
 1. Entra a [Spotify para desarrolladores](https://developer.spotify.com).
