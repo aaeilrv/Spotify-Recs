@@ -1,8 +1,9 @@
 from datetime import datetime
 import requests
-from flask import Flask, jsonify, redirect, request, session, 
+from flask import Flask, jsonify, redirect, request, session, send_file
 import urllib.parse as urlparse
 from dotenv import load_dotenv
+import json
 import os
 
 app = Flask(__name__)
@@ -161,7 +162,13 @@ def tracks():
                 track_features_jsons.append(track_features_json)
         else:
             print(f"Error for batch {i}-{i+batch_size}: {response.status_code}")
-    return jsonify(track_features_jsons)
+    
+    json_filename = 'tracks.json'
+    with open(json_filename, 'w') as json_file:
+        json.dump(track_features_jsons, json_file)
+
+    return send_file(json_filename, mimetype='application/json', as_attachment=True)
+
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
