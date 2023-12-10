@@ -5,6 +5,7 @@ import urllib.parse as urlparse
 from dotenv import load_dotenv
 import pandas as pd
 import os
+import csv
 
 app = Flask(__name__)
 app.secret_key = 'secret_key'
@@ -168,8 +169,8 @@ def tracks():
     csv_filename = 'data.csv'
     track_features_df.to_csv(csv_filename, index=False)
 
-    return send_file(csv_filename, mimetype='text/csv', as_attachment=True)
-
+    #return send_file(csv_filename, mimetype='text/csv', as_attachment=True)
+    return jsonify(track_features_jsons)
 
 if __name__ == '__main__':
     app.run(port=3000, debug=True)
