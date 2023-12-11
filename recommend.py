@@ -1,3 +1,5 @@
+# no se usó
+
 import pandas as pd
 from kmeans import Kmeans
 import numpy as np
